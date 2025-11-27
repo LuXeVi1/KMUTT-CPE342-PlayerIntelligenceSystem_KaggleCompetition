@@ -1,0 +1,378 @@
+======================================================================
+🎮 IMPROVED GAME DETECTION PIPELINE
+======================================================================
+2025-11-22 15:23:07.975967: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:477] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1763824988.193293      48 cuda_dnn.cc:8310] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1763824988.255331      48 cuda_blas.cc:1418] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+✅ All libraries imported successfully!
+
+🔍 Auto-detecting paths...
+Available inputs: ['cpe342-karena']
+Base path: /kaggle/input/cpe342-karena
+Contents: ['public_dataset']
+✅ Found public_dataset
+   Contents: ['sample_submission.csv', 'task1', 'task2', 'task3', 'task5', 'task4']
+✅ Found task4 at: /kaggle/input/cpe342-karena/public_dataset/task4
+
+📁 Final paths:
+   Base: /kaggle/input/cpe342-karena
+   Data: /kaggle/input/cpe342-karena/public_dataset
+   Task4: /kaggle/input/cpe342-karena/public_dataset/task4
+   Output: /kaggle/working
+
+✅ Task4 contents: ['val.csv', 'test_refined.csv', 'val', 'train.csv', 'test', 'train']
+   ✓ train/ found
+   ✓ val/ found
+   ✓ test/ found
+
+   CSV files found: ['val.csv', 'test_refined.csv', 'train.csv']
+
+🚀 Device: cuda
+   GPU: Tesla T4
+   Memory: 14.74 GB
+💾 RAM: 29.33 GB / 31.35 GB
+
+======================================================================
+📊 LOADING DATA
+======================================================================
+✅ Data loaded:
+   Train: (31546, 3)
+   Val: (24772, 3)
+   Test: (25889, 3) (from test_refined.csv)
+
+🔍 Verifying test images:
+   Sample file exists: True
+
+📊 Class distribution:
+Train:
+label
+0    12429
+1     4407
+2     5596
+3     5926
+4     3188
+Name: count, dtype: int64
+
+Validation:
+label
+0    3436
+1    4194
+2    6681
+3    2912
+4    7549
+Name: count, dtype: int64
+
+⚖️ Softer class weights: {0: 0.7124740539108623, 1: 1.031825659546032, 2: 1.061813626428611, 3: 1.1965080423249606, 4: 1.4067858486956495}
+
+🎨 Setting up augmentation...
+✅ Augmentation ready (no TTA for better performance)
+
+======================================================================
+🤖 LOADING VISION TRANSFORMER
+======================================================================
+preprocessor_config.json: 100%
+ 160/160 [00:00<00:00, 18.9kB/s]
+config.json: 
+ 69.7k/? [00:00<00:00, 8.35MB/s]
+Fast image processor class <class 'transformers.models.vit.image_processing_vit_fast.ViTImageProcessorFast'> is available for this model. Using slow image processor class. To use the fast image processor class set `use_fast=True`.
+model.safetensors: 100%
+ 346M/346M [00:01<00:00, 218MB/s]
+Some weights of ViTModel were not initialized from the model checkpoint at google/vit-base-patch16-224 and are newly initialized: ['pooler.dense.bias', 'pooler.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+✅ ViT loaded and frozen
+
+======================================================================
+🔄 EXTRACTING FEATURES
+======================================================================
+
+Train set: 31546 images
+  Progress: 31360/31546 (99.4%)
+✅ Extracted: (31546, 768)
+
+Validation set: 24772 images
+  Progress: 24320/24772 (98.2%)
+✅ Extracted: (24772, 768)
+
+Test set: 25889 images
+  Progress: 25600/25889 (98.9%)
+✅ Extracted: (25889, 768)
+
+💾 Features saved to /kaggle/working
+
+======================================================================
+🧠 BUILDING CLASSIFIER
+======================================================================
+✅ Model architecture ready
+   Input: 768 features
+   Output: 5 classes
+
+======================================================================
+🎯 TRAINING WITH VALIDATION SET
+======================================================================
+
+============================================================
+🔄 Trial 1/3
+============================================================
+I0000 00:00:1763827026.630056      48 gpu_device.cc:2022] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 12948 MB memory:  -> device: 0, name: Tesla T4, pci bus id: 0000:00:04.0, compute capability: 7.5
+I0000 00:00:1763827026.630741      48 gpu_device.cc:2022] Created device /job:localhost/replica:0/task:0/device:GPU:1 with 13942 MB memory:  -> device: 1, name: Tesla T4, pci bus id: 0000:00:05.0, compute capability: 7.5
+Epoch 1/20
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1763827030.609211     144 service.cc:148] XLA service 0x795c14004120 initialized for platform CUDA (this does not guarantee that XLA will be used). Devices:
+I0000 00:00:1763827030.610086     144 service.cc:156]   StreamExecutor device (0): Tesla T4, Compute Capability 7.5
+I0000 00:00:1763827030.610105     144 service.cc:156]   StreamExecutor device (1): Tesla T4, Compute Capability 7.5
+I0000 00:00:1763827030.885450     144 cuda_dnn.cc:529] Loaded cuDNN version 90300
+ 72/986 ━━━━━━━━━━━━━━━━━━━━ 1s 2ms/step - accuracy: 0.2946 - loss: 7.2331
+I0000 00:00:1763827032.700697     144 device_compiler.h:188] Compiled cluster using XLA!  This line is logged at most once for the lifetime of the process.
+986/986 ━━━━━━━━━━━━━━━━━━━━ 11s 6ms/step - accuracy: 0.6009 - loss: 5.4445 - val_accuracy: 0.5908 - val_loss: 2.9308 - learning_rate: 3.0000e-04
+Epoch 2/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8237 - loss: 1.9976 - val_accuracy: 0.5970 - val_loss: 1.7649 - learning_rate: 3.0000e-04
+Epoch 3/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8446 - loss: 1.0554 - val_accuracy: 0.6114 - val_loss: 1.4322 - learning_rate: 3.0000e-04
+Epoch 4/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8513 - loss: 0.7813 - val_accuracy: 0.5778 - val_loss: 1.4798 - learning_rate: 3.0000e-04
+Epoch 5/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8548 - loss: 0.6960 - val_accuracy: 0.5987 - val_loss: 1.3640 - learning_rate: 3.0000e-04
+Epoch 6/20
+982/986 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - accuracy: 0.8570 - loss: 0.6565
+Epoch 6: ReduceLROnPlateau reducing learning rate to 0.0001500000071246177.
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8569 - loss: 0.6565 - val_accuracy: 0.5920 - val_loss: 1.3887 - learning_rate: 3.0000e-04
+Epoch 7/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8733 - loss: 0.5832 - val_accuracy: 0.6377 - val_loss: 1.1862 - learning_rate: 1.5000e-04
+Epoch 8/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8850 - loss: 0.5242 - val_accuracy: 0.6335 - val_loss: 1.1799 - learning_rate: 1.5000e-04
+Epoch 9/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8884 - loss: 0.4993 - val_accuracy: 0.6315 - val_loss: 1.2284 - learning_rate: 1.5000e-04
+Epoch 10/20
+973/986 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - accuracy: 0.8942 - loss: 0.4761
+Epoch 10: ReduceLROnPlateau reducing learning rate to 7.500000356230885e-05.
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8942 - loss: 0.4762 - val_accuracy: 0.6226 - val_loss: 1.2407 - learning_rate: 1.5000e-04
+Epoch 11/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9066 - loss: 0.4330 - val_accuracy: 0.6453 - val_loss: 1.2345 - learning_rate: 7.5000e-05
+Epoch 12/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9198 - loss: 0.3938 - val_accuracy: 0.6492 - val_loss: 1.2071 - learning_rate: 7.5000e-05
+Epoch 13/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9216 - loss: 0.3741 - val_accuracy: 0.6532 - val_loss: 1.1922 - learning_rate: 7.5000e-05
+Epoch 14/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9250 - loss: 0.3610 - val_accuracy: 0.6422 - val_loss: 1.2462 - learning_rate: 7.5000e-05
+Epoch 15/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9288 - loss: 0.3461 - val_accuracy: 0.6406 - val_loss: 1.2629 - learning_rate: 7.5000e-05
+Epoch 16/20
+966/986 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - accuracy: 0.9299 - loss: 0.3376
+Epoch 16: ReduceLROnPlateau reducing learning rate to 3.7500001781154424e-05.
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9298 - loss: 0.3377 - val_accuracy: 0.6346 - val_loss: 1.2994 - learning_rate: 7.5000e-05
+Epoch 17/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9405 - loss: 0.3061 - val_accuracy: 0.6510 - val_loss: 1.2547 - learning_rate: 3.7500e-05
+Epoch 18/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9444 - loss: 0.2868 - val_accuracy: 0.6415 - val_loss: 1.3083 - learning_rate: 3.7500e-05
+Epoch 19/20
+984/986 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - accuracy: 0.9487 - loss: 0.2772
+Epoch 19: ReduceLROnPlateau reducing learning rate to 1.8750000890577212e-05.
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9487 - loss: 0.2772 - val_accuracy: 0.6475 - val_loss: 1.3038 - learning_rate: 3.7500e-05
+Epoch 20/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9546 - loss: 0.2642 - val_accuracy: 0.6505 - val_loss: 1.3209 - learning_rate: 1.8750e-05
+Epoch 20: early stopping
+Restoring model weights from the end of the best epoch: 13.
+
+✅ Trial 1 Validation F1: 0.6515
+   🏆 New best model!
+
+============================================================
+🔄 Trial 2/3
+============================================================
+Epoch 1/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 9s 6ms/step - accuracy: 0.6119 - loss: 5.4643 - val_accuracy: 0.5947 - val_loss: 2.9276 - learning_rate: 3.0000e-04
+Epoch 2/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8228 - loss: 1.9894 - val_accuracy: 0.6253 - val_loss: 1.6998 - learning_rate: 3.0000e-04
+Epoch 3/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8481 - loss: 1.0295 - val_accuracy: 0.6299 - val_loss: 1.3627 - learning_rate: 3.0000e-04
+Epoch 4/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8507 - loss: 0.7729 - val_accuracy: 0.6259 - val_loss: 1.2798 - learning_rate: 3.0000e-04
+Epoch 5/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8530 - loss: 0.6936 - val_accuracy: 0.6203 - val_loss: 1.3110 - learning_rate: 3.0000e-04
+Epoch 6/20
+980/986 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - accuracy: 0.8562 - loss: 0.6523
+Epoch 6: ReduceLROnPlateau reducing learning rate to 0.0001500000071246177.
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8561 - loss: 0.6523 - val_accuracy: 0.6195 - val_loss: 1.2912 - learning_rate: 3.0000e-04
+Epoch 7/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8708 - loss: 0.5930 - val_accuracy: 0.6199 - val_loss: 1.2903 - learning_rate: 1.5000e-04
+Epoch 8/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8883 - loss: 0.5133 - val_accuracy: 0.6303 - val_loss: 1.2137 - learning_rate: 1.5000e-04
+Epoch 9/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8835 - loss: 0.5059 - val_accuracy: 0.6440 - val_loss: 1.1979 - learning_rate: 1.5000e-04
+Epoch 10/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8940 - loss: 0.4696 - val_accuracy: 0.6215 - val_loss: 1.3193 - learning_rate: 1.5000e-04
+Epoch 11/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8950 - loss: 0.4583 - val_accuracy: 0.6178 - val_loss: 1.2611 - learning_rate: 1.5000e-04
+Epoch 12/20
+965/986 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - accuracy: 0.9001 - loss: 0.4533
+Epoch 12: ReduceLROnPlateau reducing learning rate to 7.500000356230885e-05.
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8999 - loss: 0.4536 - val_accuracy: 0.6232 - val_loss: 1.2665 - learning_rate: 1.5000e-04
+Epoch 13/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9084 - loss: 0.4186 - val_accuracy: 0.6326 - val_loss: 1.3017 - learning_rate: 7.5000e-05
+Epoch 14/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9200 - loss: 0.3797 - val_accuracy: 0.6388 - val_loss: 1.2740 - learning_rate: 7.5000e-05
+Epoch 15/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9253 - loss: 0.3548 - val_accuracy: 0.6486 - val_loss: 1.2445 - learning_rate: 7.5000e-05
+Epoch 16/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9294 - loss: 0.3457 - val_accuracy: 0.6412 - val_loss: 1.2908 - learning_rate: 7.5000e-05
+Epoch 17/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9300 - loss: 0.3356 - val_accuracy: 0.6471 - val_loss: 1.2475 - learning_rate: 7.5000e-05
+Epoch 18/20
+966/986 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - accuracy: 0.9338 - loss: 0.3253
+Epoch 18: ReduceLROnPlateau reducing learning rate to 3.7500001781154424e-05.
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9337 - loss: 0.3254 - val_accuracy: 0.6459 - val_loss: 1.3089 - learning_rate: 7.5000e-05
+Epoch 19/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9433 - loss: 0.3016 - val_accuracy: 0.6487 - val_loss: 1.2717 - learning_rate: 3.7500e-05
+Epoch 20/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9507 - loss: 0.2745 - val_accuracy: 0.6437 - val_loss: 1.3311 - learning_rate: 3.7500e-05
+Restoring model weights from the end of the best epoch: 19.
+
+✅ Trial 2 Validation F1: 0.6473
+
+============================================================
+🔄 Trial 3/3
+============================================================
+Epoch 1/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 9s 6ms/step - accuracy: 0.6077 - loss: 5.4078 - val_accuracy: 0.5951 - val_loss: 2.8637 - learning_rate: 3.0000e-04
+Epoch 2/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8220 - loss: 1.9433 - val_accuracy: 0.5824 - val_loss: 1.8091 - learning_rate: 3.0000e-04
+Epoch 3/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8434 - loss: 1.0261 - val_accuracy: 0.5921 - val_loss: 1.4688 - learning_rate: 3.0000e-04
+Epoch 4/20
+970/986 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - accuracy: 0.8497 - loss: 0.7631
+Epoch 4: ReduceLROnPlateau reducing learning rate to 0.0001500000071246177.
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8496 - loss: 0.7629 - val_accuracy: 0.5919 - val_loss: 1.3815 - learning_rate: 3.0000e-04
+Epoch 5/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8707 - loss: 0.6426 - val_accuracy: 0.6500 - val_loss: 1.2147 - learning_rate: 1.5000e-04
+Epoch 6/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8859 - loss: 0.5524 - val_accuracy: 0.6151 - val_loss: 1.2943 - learning_rate: 1.5000e-04
+Epoch 7/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8895 - loss: 0.5137 - val_accuracy: 0.6277 - val_loss: 1.2419 - learning_rate: 1.5000e-04
+Epoch 8/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8922 - loss: 0.4965 - val_accuracy: 0.6572 - val_loss: 1.1525 - learning_rate: 1.5000e-04
+Epoch 9/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8934 - loss: 0.4887 - val_accuracy: 0.6578 - val_loss: 1.1239 - learning_rate: 1.5000e-04
+Epoch 10/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8926 - loss: 0.4810 - val_accuracy: 0.6321 - val_loss: 1.2293 - learning_rate: 1.5000e-04
+Epoch 11/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8950 - loss: 0.4674 - val_accuracy: 0.6330 - val_loss: 1.2349 - learning_rate: 1.5000e-04
+Epoch 12/20
+983/986 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - accuracy: 0.8955 - loss: 0.4621
+Epoch 12: ReduceLROnPlateau reducing learning rate to 7.500000356230885e-05.
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.8955 - loss: 0.4621 - val_accuracy: 0.6157 - val_loss: 1.3343 - learning_rate: 1.5000e-04
+Epoch 13/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9133 - loss: 0.4130 - val_accuracy: 0.6539 - val_loss: 1.1891 - learning_rate: 7.5000e-05
+Epoch 14/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9252 - loss: 0.3682 - val_accuracy: 0.6374 - val_loss: 1.3147 - learning_rate: 7.5000e-05
+Epoch 15/20
+965/986 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - accuracy: 0.9324 - loss: 0.3495
+Epoch 15: ReduceLROnPlateau reducing learning rate to 3.7500001781154424e-05.
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9323 - loss: 0.3497 - val_accuracy: 0.6405 - val_loss: 1.2908 - learning_rate: 7.5000e-05
+Epoch 16/20
+986/986 ━━━━━━━━━━━━━━━━━━━━ 4s 4ms/step - accuracy: 0.9347 - loss: 0.3319 - val_accuracy: 0.6466 - val_loss: 1.2900 - learning_rate: 3.7500e-05
+Epoch 16: early stopping
+Restoring model weights from the end of the best epoch: 9.
+
+✅ Trial 3 Validation F1: 0.6504
+
+============================================================
+📊 Best Validation F1: 0.6515
+📁 Best model: /kaggle/working/models/model_trial1.keras
+============================================================
+
+📥 Loading best model...
+
+📊 Final Validation Performance:
+   Macro F1: 0.6515
+
+   Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.71      0.94      0.81      3436
+           1       0.70      0.75      0.73      4194
+           2       0.71      0.52      0.60      6681
+           3       0.30      0.59      0.40      2912
+           4       0.88      0.62      0.72      7549
+
+    accuracy                           0.65     24772
+   macro avg       0.66      0.68      0.65     24772
+weighted avg       0.71      0.65      0.66     24772
+
+
+   Confusion Matrix:
+[[3215   66   82   53   20]
+ [ 196 3153  311  295  239]
+ [ 307  176 3444 2519  235]
+ [ 182  181  674 1704  171]
+ [ 608  925  328 1024 4664]]
+
+   Validation predictions distribution:
+   Class 0: 4508 ( 18.2%)
+   Class 1: 4501 ( 18.2%)
+   Class 2: 4839 ( 19.5%)
+   Class 3: 5595 ( 22.6%)
+   Class 4: 5329 ( 21.5%)
+
+======================================================================
+🌲 TRAINING XGBOOST
+======================================================================
+✅ XGBoost Validation F1: 0.4845
+
+🤝 Creating ensemble...
+   Ensemble Validation F1: 0.6348
+
+🏆 Best approach: Neural Network (F1: 0.6515)
+
+======================================================================
+🎨 GENERATING FINAL TEST PREDICTIONS
+======================================================================
+✅ Using: Neural Network
+   Expected F1: 0.6515
+
+📊 Test predictions distribution:
+   Class 0:  5005 ( 19.3%) | Train:  39.4%
+   Class 1:  5548 ( 21.4%) | Train:  14.0%
+   Class 2:  3853 ( 14.9%) | Train:  17.7%
+   Class 3:  7366 ( 28.5%) | Train:  18.8%
+   Class 4:  4117 ( 15.9%) | Train:  10.1%
+
+======================================================================
+📝 CREATING SUBMISSION
+======================================================================
+✅ Submission saved: /kaggle/working/submission.csv
+✅ Probabilities saved: /kaggle/working/predictions_with_probs.csv
+
+======================================================================
+🎉 PIPELINE COMPLETE!
+======================================================================
+
+📊 Summary:
+   Best approach: Neural Network
+   Validation F1: 0.6515
+   Total test samples: 25889
+   Submission file: /kaggle/working/submission.csv
+
+🎯 Key features:
+   ✓ Used validation set for model selection
+   ✓ Simple 2-layer classifier (less overfitting)
+   ✓ Gentle augmentation for low-res images
+   ✓ No TTA (better for 144p images)
+   ✓ Softer class weights (sqrt)
+   ✓ NN + XGBoost + Ensemble comparison
+
+📋 Sample predictions:
+         id  task4
+0  ANS00001      1
+1  ANS00002      2
+2  ANS00003      3
+3  ANS00004      0
+4  ANS00005      3
+5  ANS00006      2
+6  ANS00007      4
+7  ANS00008      3
+8  ANS00009      1
+9  ANS00010      1
+
+✅ Ready to submit to Kaggle!
+======================================================================

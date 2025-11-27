@@ -1,0 +1,235 @@
+================================================================================
+TASK 3 v8 - ADVANCED ENSEMBLE WITH CALIBRATION & OPTIMIZATION
+================================================================================
+
+Train: (104000, 35), Test: (25889, 34)
+Features: 32
+Non-spenders: 50132, Spenders: 53868
+
+================================================================================
+CROSS-VALIDATION WITH ADVANCED ENSEMBLE
+================================================================================
+
+================================================================================
+FOLD 1/5
+================================================================================
+
+[1] Training multiple classifiers...
+  Classifier 1: Mean proba = 0.5045
+  Classifier 2: Mean proba = 0.5060
+  Classifier 3: Mean proba = 0.5173
+  Classifier 4: Mean proba = 0.5173
+
+[2] Soft blending probabilities...
+
+[3] Calibrating probabilities...
+  Before calibration: mean=0.5106, std=0.2537
+  After calibration: mean=0.5178, std=0.2529
+
+[4] Training multiple regressors...
+  Regressor 1: Mean pred = 11014.66
+  Regressor 2: Mean pred = 11003.85
+  Regressor 3: Mean pred = 10998.86
+  Regressor 4: Mean pred = 11007.27
+
+[5] Optimizing regression ensemble weights...
+  Weights: [4.00402074e-01 2.62785255e-01 3.36812671e-01 1.07233561e-17]
+
+[6] Optimizing threshold with Bayesian approach...
+  Optimal threshold: 0.5400
+
+[FOLD 1 RESULTS]
+  Normalized MAE: 0.792598
+  MAE: 2672.44
+  Predicted spenders: 9897/20800 (47.6%)
+  Sum ratio: 1.0547
+
+================================================================================
+FOLD 2/5
+================================================================================
+
+[1] Training multiple classifiers...
+  Classifier 1: Mean proba = 0.5055
+  Classifier 2: Mean proba = 0.5073
+  Classifier 3: Mean proba = 0.5186
+  Classifier 4: Mean proba = 0.5191
+
+[2] Soft blending probabilities...
+
+[3] Calibrating probabilities...
+  Before calibration: mean=0.5119, std=0.2541
+  After calibration: mean=0.5150, std=0.2520
+
+[4] Training multiple regressors...
+  Regressor 1: Mean pred = 10936.39
+  Regressor 2: Mean pred = 10899.03
+  Regressor 3: Mean pred = 10922.30
+  Regressor 4: Mean pred = 10922.46
+
+[5] Optimizing regression ensemble weights...
+  Weights: [0.21509585 0.21633016 0.42038592 0.14818807]
+
+[6] Optimizing threshold with Bayesian approach...
+  Optimal threshold: 0.4800
+
+[FOLD 2 RESULTS]
+  Normalized MAE: 0.781494
+  MAE: 2884.45
+  Predicted spenders: 10630/20800 (51.1%)
+  Sum ratio: 1.0388
+
+================================================================================
+FOLD 3/5
+================================================================================
+
+[1] Training multiple classifiers...
+  Classifier 1: Mean proba = 0.5079
+  Classifier 2: Mean proba = 0.5099
+  Classifier 3: Mean proba = 0.5203
+  Classifier 4: Mean proba = 0.5208
+
+[2] Soft blending probabilities...
+
+[3] Calibrating probabilities...
+  Before calibration: mean=0.5140, std=0.2549
+  After calibration: mean=0.5176, std=0.2527
+
+[4] Training multiple regressors...
+  Regressor 1: Mean pred = 11365.93
+  Regressor 2: Mean pred = 11374.05
+  Regressor 3: Mean pred = 11361.11
+  Regressor 4: Mean pred = 11352.16
+
+[5] Optimizing regression ensemble weights...
+  Weights: [2.49257639e-01 2.37556159e-01 5.13186202e-01 2.34611123e-17]
+
+[6] Optimizing threshold with Bayesian approach...
+  Optimal threshold: 0.4600
+
+[FOLD 3 RESULTS]
+  Normalized MAE: 0.789530
+  MAE: 2859.20
+  Predicted spenders: 10989/20800 (52.8%)
+  Sum ratio: 1.0418
+
+================================================================================
+FOLD 4/5
+================================================================================
+
+[1] Training multiple classifiers...
+  Classifier 1: Mean proba = 0.5048
+  Classifier 2: Mean proba = 0.5070
+  Classifier 3: Mean proba = 0.5174
+  Classifier 4: Mean proba = 0.5176
+
+[2] Soft blending probabilities...
+
+[3] Calibrating probabilities...
+  Before calibration: mean=0.5110, std=0.2541
+  After calibration: mean=0.5207, std=0.2478
+
+[4] Training multiple regressors...
+  Regressor 1: Mean pred = 10918.85
+  Regressor 2: Mean pred = 10914.01
+  Regressor 3: Mean pred = 10898.99
+  Regressor 4: Mean pred = 10891.22
+
+[5] Optimizing regression ensemble weights...
+  Weights: [0.1773944  0.13624503 0.48012874 0.20623183]
+
+[6] Optimizing threshold with Bayesian approach...
+  Optimal threshold: 0.4600
+
+[FOLD 4 RESULTS]
+  Normalized MAE: 0.785183
+  MAE: 2768.42
+  Predicted spenders: 10573/20800 (50.8%)
+  Sum ratio: 1.0572
+
+================================================================================
+FOLD 5/5
+================================================================================
+
+[1] Training multiple classifiers...
+  Classifier 1: Mean proba = 0.5057
+  Classifier 2: Mean proba = 0.5079
+  Classifier 3: Mean proba = 0.5185
+  Classifier 4: Mean proba = 0.5188
+
+[2] Soft blending probabilities...
+
+[3] Calibrating probabilities...
+  Before calibration: mean=0.5120, std=0.2559
+  After calibration: mean=0.5187, std=0.2487
+
+[4] Training multiple regressors...
+  Regressor 1: Mean pred = 11160.01
+  Regressor 2: Mean pred = 11118.93
+  Regressor 3: Mean pred = 11139.71
+  Regressor 4: Mean pred = 11126.06
+
+[5] Optimizing regression ensemble weights...
+  Weights: [0.34617485 0.15339296 0.30510033 0.19533185]
+
+[6] Optimizing threshold with Bayesian approach...
+  Optimal threshold: 0.4800
+
+[FOLD 5 RESULTS]
+  Normalized MAE: 0.786604
+  MAE: 2841.51
+  Predicted spenders: 10263/20800 (49.3%)
+  Sum ratio: 1.0429
+
+================================================================================
+OVERALL OUT-OF-FOLD EVALUATION
+================================================================================
+
+OOF Metrics:
+  Normalized MAE: 0.787078
+  MAE: 2805.20
+  CV Mean: 0.787082 ± 0.003781
+
+  Avg Threshold: 0.4840 ± 0.0294
+
+  ✅ BEATS v2's 0.778801 by 0.83%!
+
+================================================================================
+SNAPSHOT ENSEMBLE FOR TEST PREDICTIONS
+================================================================================
+
+Using average threshold: 0.4840
+
+Ensembled 5 snapshots
+  Mean probability: 0.5200
+  Mean amount: 11312.07
+
+Predicted spenders: 13172/25889 (50.9%)
+
+================================================================================
+SUBMISSION SAVED
+================================================================================
+File: /content/task3/submission_task3_v8_advanced.csv
+Expected OOF Normalized MAE: 0.787078
+
+Submission stats:
+  Non-zero: 13172 (50.9%)
+  Mean: 11110.55 THB
+  Median: 3091.03 THB
+  Sum: 287640927.75 THB
+
+Saved CV analysis: cv_analysis_v8.csv
+
+================================================================================
+TECHNIQUE SUMMARY
+================================================================================
+✓ Soft-blending (geometric mean)
+✓ Snapshot ensemble (5 folds)
+✓ Calibrated probabilities (isotonic)
+✓ Bayesian-optimized threshold
+✓ Weighted regression ensemble
+✓ Complete OOF evaluation
+✓ CV threshold averaging
+
+================================================================================
+DONE!
+================================================================================

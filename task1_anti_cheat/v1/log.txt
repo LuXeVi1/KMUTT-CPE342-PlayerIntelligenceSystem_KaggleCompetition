@@ -1,0 +1,59 @@
+Drive already mounted at /content/drive; to attempt to forcibly remount, call drive.mount("/content/drive", force_remount=True).
+Training fold 1...
+[LightGBM] [Info] Number of positive: 50895, number of negative: 50895
+[LightGBM] [Info] Auto-choosing row-wise multi-threading, the overhead of testing was 0.007163 seconds.
+You can set `force_row_wise=true` to remove the overhead.
+And if memory is not enough, you can set `force_col_wise=true`.
+[LightGBM] [Info] Total Bins 5100
+[LightGBM] [Info] Number of data points in the train set: 101790, number of used features: 20
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.500000 -> initscore=0.000000
+Training until validation scores don't improve for 30 rounds
+Early stopping, best iteration is:
+[293]	valid_0's binary_logloss: 0.360862
+Training fold 2...
+[LightGBM] [Info] Number of positive: 50895, number of negative: 50895
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.017524 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 5100
+[LightGBM] [Info] Number of data points in the train set: 101790, number of used features: 20
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.500000 -> initscore=0.000000
+Training until validation scores don't improve for 30 rounds
+Early stopping, best iteration is:
+[286]	valid_0's binary_logloss: 0.361055
+Training fold 3...
+[LightGBM] [Info] Number of positive: 50895, number of negative: 50895
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.017890 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 5096
+[LightGBM] [Info] Number of data points in the train set: 101790, number of used features: 20
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.500000 -> initscore=0.000000
+Training until validation scores don't improve for 30 rounds
+Early stopping, best iteration is:
+[226]	valid_0's binary_logloss: 0.355601
+Training fold 4...
+[LightGBM] [Info] Number of positive: 50895, number of negative: 50895
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.017440 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 5100
+[LightGBM] [Info] Number of data points in the train set: 101790, number of used features: 20
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.500000 -> initscore=0.000000
+Training until validation scores don't improve for 30 rounds
+Early stopping, best iteration is:
+[230]	valid_0's binary_logloss: 0.367339
+Training fold 5...
+[LightGBM] [Info] Number of positive: 50896, number of negative: 50896
+[LightGBM] [Info] Auto-choosing col-wise multi-threading, the overhead of testing was 0.017442 seconds.
+You can set `force_col_wise=true` to remove the overhead.
+[LightGBM] [Info] Total Bins 5100
+[LightGBM] [Info] Number of data points in the train set: 101792, number of used features: 20
+[LightGBM] [Info] [binary:BoostFromScore]: pavg=0.500000 -> initscore=0.000000
+Training until validation scores don't improve for 30 rounds
+Early stopping, best iteration is:
+[240]	valid_0's binary_logloss: 0.35746
+Saved stacked predictions for meta-model.
+
+Drive already mounted at /content/drive; to attempt to forcibly remount, call drive.mount("/content/drive", force_remount=True).
+Meta-model F2 score on validation: 0.6734
+Best threshold from validation tuning: 0.1, F2: 0.8384
+Saved submission to /content/drive/MyDrive/ML-Task1-v2/submission_task1_meta_model.csv
+Meta-model saved.

@@ -1,0 +1,106 @@
+================================================================================
+Train shape: (101658, 47)
+Test shape: (25889, 46)
+================================================================================
+
+Numeric features: 34
+Categorical features: 12
+
+================================================================================
+Creating advanced features...
+Total features after engineering: 69
+
+================================================================================
+Handling missing values intelligently...
+
+Encoding categorical variables...
+Final feature count: 69
+
+================================================================================
+Scaling features...
+
+================================================================================
+Analyzing class distribution...
+Class distribution:
+  Class 0: 40064 (39.41%)
+  Class 1: 25397 (24.98%)
+  Class 2: 20549 (20.21%)
+  Class 3: 15648 (15.39%)
+
+Imbalance ratio: 2.56
+
+Applying SMOTE to balance classes...
+Class distribution after SMOTE:
+  Class 0: 40064 (25.00%)
+  Class 1: 40064 (25.00%)
+  Class 2: 40064 (25.00%)
+  Class 3: 40064 (25.00%)
+
+Class weights: {0: np.float64(1.0), 1: np.float64(1.0), 2: np.float64(1.0), 3: np.float64(1.0)}
+
+================================================================================
+Initializing ensemble models...
+
+================================================================================
+Starting Stratified K-Fold Cross-Validation (5 folds)...
+================================================================================
+
+--- Fold 1/5 ---
+F1 (macro): 0.8064
+F1 (weighted): 0.8064
+
+--- Fold 2/5 ---
+F1 (macro): 0.8106
+F1 (weighted): 0.8106
+
+--- Fold 3/5 ---
+F1 (macro): 0.8046
+F1 (weighted): 0.8046
+
+--- Fold 4/5 ---
+F1 (macro): 0.8099
+F1 (weighted): 0.8099
+
+--- Fold 5/5 ---
+F1 (macro): 0.8111
+F1 (weighted): 0.8111
+
+================================================================================
+CROSS-VALIDATION RESULTS
+================================================================================
+Average F1 (macro):    0.8085 ± 0.0026
+Average F1 (weighted): 0.8085 ± 0.0026
+================================================================================
+
+Training final model on all data...
+✓ Final model trained successfully
+
+Making predictions on test set...
+
+================================================================================
+SUBMISSION SUMMARY
+================================================================================
+✓ Submission file saved: /content/task2/submission_Task2_v2.csv
+✓ Total predictions: 25889
+
+Prediction distribution:
+  Class 0: 10635 (41.08%)
+  Class 1: 6362 (24.57%)
+  Class 2: 5082 (19.63%)
+  Class 3: 3810 (14.72%)
+
+First 10 predictions:
+         id  task2
+0  ANS00001      2
+1  ANS00002      0
+2  ANS00003      0
+3  ANS00004      0
+4  ANS00005      0
+5  ANS00006      2
+6  ANS00007      1
+7  ANS00008      0
+8  ANS00009      0
+9  ANS00010      1
+================================================================================
+
+✓ Task 2 v2 completed successfully!

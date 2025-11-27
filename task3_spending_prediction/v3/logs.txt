@@ -1,0 +1,209 @@
+================================================================================
+TASK 3: ENHANCED TWO-STAGE STACKING MODEL
+================================================================================
+
+[1] Loading data...
+Train: (104000, 35), Test: (25889, 34)
+Removing non-numeric columns: ['id', 'player_id']
+Features before engineering: 32
+
+[2] Enhanced feature engineering...
+Features after engineering: 84
+New features created: 52
+
+================================================================================
+ENHANCED TWO-STAGE CROSS-VALIDATION
+================================================================================
+
+================================================================================
+FOLD 1/5
+================================================================================
+
+[STAGE 1: Classification - Will player spend?]
+Class balance: 43095 spenders / 40105 non-spenders (weight=0.93)
+  xgb1: AUC=0.7889, Mean proba=0.5065
+  xgb2: AUC=0.7886, Mean proba=0.5075
+  lgb1: AUC=0.7892, Mean proba=0.5191
+  lgb2: AUC=0.7877, Mean proba=0.5192
+
+  Weighted Ensemble AUC: 0.7895
+
+[STAGE 2: Regression - How much will they spend?]
+Training on 43095 spenders
+  xgb1: MAE (spenders)=3386.35, Mean=11036.22
+  xgb2: MAE (spenders)=3400.39, Mean=11046.48
+  lgb1: MAE (spenders)=3392.25, Mean=11051.40
+  lgb2: MAE (spenders)=3403.37, Mean=11060.32
+
+  Weighted Ensemble mean: 11047.54 THB
+
+[Advanced Threshold Optimization]
+  Optimal threshold: 0.5375
+  Normalized MAE: 0.795334
+
+[FOLD 1 SUMMARY]
+  Normalized MAE: 0.795334
+  MAE: 2680.93 THB
+  Predicted spenders: 9409/20800 (45.2%)
+  Sum ratio: 1.0343
+
+================================================================================
+FOLD 2/5
+================================================================================
+
+[STAGE 1: Classification - Will player spend?]
+Class balance: 43095 spenders / 40105 non-spenders (weight=0.93)
+  xgb1: AUC=0.7809, Mean proba=0.5066
+  xgb2: AUC=0.7802, Mean proba=0.5071
+  lgb1: AUC=0.7800, Mean proba=0.5186
+  lgb2: AUC=0.7798, Mean proba=0.5188
+
+  Weighted Ensemble AUC: 0.7810
+
+[STAGE 2: Regression - How much will they spend?]
+Training on 43095 spenders
+  xgb1: MAE (spenders)=3362.94, Mean=10770.20
+  xgb2: MAE (spenders)=3367.70, Mean=10775.26
+  lgb1: MAE (spenders)=3384.45, Mean=10772.73
+  lgb2: MAE (spenders)=3412.16, Mean=10782.55
+
+  Weighted Ensemble mean: 10774.61 THB
+
+[Advanced Threshold Optimization]
+  Optimal threshold: 0.4975
+  Normalized MAE: 0.784470
+
+[FOLD 2 SUMMARY]
+  Normalized MAE: 0.784470
+  MAE: 2765.90 THB
+  Predicted spenders: 10355/20800 (49.8%)
+  Sum ratio: 1.0487
+
+================================================================================
+FOLD 3/5
+================================================================================
+
+[STAGE 1: Classification - Will player spend?]
+Class balance: 43094 spenders / 40106 non-spenders (weight=0.93)
+  xgb1: AUC=0.7804, Mean proba=0.5064
+  xgb2: AUC=0.7803, Mean proba=0.5072
+  lgb1: AUC=0.7804, Mean proba=0.5181
+  lgb2: AUC=0.7806, Mean proba=0.5186
+
+  Weighted Ensemble AUC: 0.7811
+
+[STAGE 2: Regression - How much will they spend?]
+Training on 43094 spenders
+  xgb1: MAE (spenders)=3517.36, Mean=11102.56
+  xgb2: MAE (spenders)=3540.85, Mean=11126.03
+  lgb1: MAE (spenders)=3548.16, Mean=11112.92
+  lgb2: MAE (spenders)=3551.18, Mean=11131.27
+
+  Weighted Ensemble mean: 11116.68 THB
+
+[Advanced Threshold Optimization]
+  Optimal threshold: 0.4975
+  Normalized MAE: 0.783959
+
+[FOLD 3 SUMMARY]
+  Normalized MAE: 0.783959
+  MAE: 2883.60 THB
+  Predicted spenders: 10183/20800 (49.0%)
+  Sum ratio: 1.0411
+
+================================================================================
+FOLD 4/5
+================================================================================
+
+[STAGE 1: Classification - Will player spend?]
+Class balance: 43094 spenders / 40106 non-spenders (weight=0.93)
+  xgb1: AUC=0.7802, Mean proba=0.5059
+  xgb2: AUC=0.7803, Mean proba=0.5064
+  lgb1: AUC=0.7805, Mean proba=0.5180
+  lgb2: AUC=0.7807, Mean proba=0.5181
+
+  Weighted Ensemble AUC: 0.7811
+
+[STAGE 2: Regression - How much will they spend?]
+Training on 43094 spenders
+  xgb1: MAE (spenders)=3397.97, Mean=11179.23
+  xgb2: MAE (spenders)=3414.06, Mean=11200.83
+  lgb1: MAE (spenders)=3424.63, Mean=11207.63
+  lgb2: MAE (spenders)=3427.41, Mean=11211.30
+
+  Weighted Ensemble mean: 11198.23 THB
+
+[Advanced Threshold Optimization]
+  Optimal threshold: 0.4975
+  Normalized MAE: 0.783912
+
+[FOLD 4 SUMMARY]
+  Normalized MAE: 0.783912
+  MAE: 2861.16 THB
+  Predicted spenders: 10177/20800 (48.9%)
+  Sum ratio: 1.0572
+
+================================================================================
+FOLD 5/5
+================================================================================
+
+[STAGE 1: Classification - Will player spend?]
+Class balance: 43094 spenders / 40106 non-spenders (weight=0.93)
+  xgb1: AUC=0.7855, Mean proba=0.5056
+  xgb2: AUC=0.7851, Mean proba=0.5061
+  lgb1: AUC=0.7851, Mean proba=0.5176
+  lgb2: AUC=0.7841, Mean proba=0.5178
+
+  Weighted Ensemble AUC: 0.7859
+
+[STAGE 2: Regression - How much will they spend?]
+Training on 43094 spenders
+  xgb1: MAE (spenders)=3519.07, Mean=11085.00
+  xgb2: MAE (spenders)=3540.80, Mean=11097.25
+  lgb1: MAE (spenders)=3516.09, Mean=11109.38
+  lgb2: MAE (spenders)=3530.40, Mean=11113.83
+
+  Weighted Ensemble mean: 11100.12 THB
+
+[Advanced Threshold Optimization]
+  Optimal threshold: 0.4975
+  Normalized MAE: 0.792707
+
+[FOLD 5 SUMMARY]
+  Normalized MAE: 0.792707
+  MAE: 2750.78 THB
+  Predicted spenders: 10165/20800 (48.9%)
+  Sum ratio: 1.0341
+
+================================================================================
+OVERALL OUT-OF-FOLD EVALUATION
+================================================================================
+
+OOF Metrics:
+  Normalized MAE: 0.788079
+  MAE: 2788.47 THB
+  CV Mean: 0.788076 ± 0.004928
+  Avg Threshold: 0.5055 ± 0.0160
+
+================================================================================
+GENERATING TEST PREDICTIONS
+================================================================================
+
+Snapshot ensemble from 5 folds
+Using average threshold: 0.5055
+
+Test Predictions:
+  Predicted spenders: 12675/25889 (49.0%)
+  Mean: 11189.01 THB
+  Median (non-zero): 3256.35 THB
+  Sum: 289,672,245.11 THB
+
+================================================================================
+SUBMISSION SAVED
+================================================================================
+File: /kaggle/working/submission_task3_enhanced.csv
+Expected OOF Score: 0.788079
+
+================================================================================
+✅ DONE!
+================================================================================
