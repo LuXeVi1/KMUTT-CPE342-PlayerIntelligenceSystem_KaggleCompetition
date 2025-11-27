@@ -32,7 +32,7 @@ The **Player Intelligence System** is a modular Machine Learning pipeline design
 *   **Performance:** **~79% Normalized Accuracy** (Normalized MAE: 0.7881).
 *   **Key Insight:** Solved the "Zero-Inflation" problem where 48% of players spend nothing.
 
-### �️ Module 4: Game Vision Engine
+### 🖼️ Module 4: Game Vision Engine
 **Objective:** Automate content tagging and genre classification from low-resolution screenshots.
 *   **Tech:** Vision Transformer (ViT) Feature Extractor + Neural Network Head.
 *   **Performance:** **65% F1-Macro** on low-res data.
@@ -46,7 +46,7 @@ The **Player Intelligence System** is a modular Machine Learning pipeline design
 
 ---
 
-## �️ Technology Stack
+## Technology Stack
 *   **Languages:** Python 3.9+
 *   **Data Processing:** Pandas, NumPy, Scikit-learn, Imbalanced-learn
 *   **Machine Learning:** XGBoost, LightGBM, CatBoost, RandomForest
