@@ -58,6 +58,14 @@ The system is built as a modular pipeline, where each task represents a speciali
 *   **Key Signals:** `reports_received` and `crosshair_placement` were top predictors, confirming that combining community reports with mechanical stats is highly effective.
 *   **Domain Impact:** The system acts as a force multiplier, automating the detection of 95% of cheaters and preserving game integrity.
 
+### 2.4 Common Mistakes & Failed Experiments
+*   **Failure 1: The "Missing = Cheater" Bias**
+    *   *Issue:* Early models achieved artificially high scores by simply flagging anyone with missing data as a cheater.
+    *   *Solution:* We implemented "Neutral Imputation" (filling with median instead of 0 or mean) to force the model to look at actual gameplay stats rather than data artifacts.
+*   **Failure 2: Over-reliance on Accuracy**
+    *   *Issue:* Using raw `accuracy` scores caused false positives for skilled legitimate players (smurfs).
+    *   *Solution:* We created "Consistency" features (`kill_consistency`) and interaction terms (`reports_x_crosshair`). A skilled player has good crosshair placement; a cheater often doesn't, despite hitting shots.
+
 ---
 
 ## 3. Task 2: Player Segmentation
@@ -79,6 +87,9 @@ The system is built as a modular pipeline, where each task represents a speciali
 *   **Segmentation Logic:** The model successfully distinguished segments using a mix of time-investment and monetary-investment features.
 *   **Strategic Value:** Enables targeted marketing strategies, such as retention campaigns for Casuals and VIP services for Whales.
 
+### 3.4 Common Mistakes & Failed Experiments
+*   **Feature Selection Oversight:** We couldn't achieve a higher prediction score because we dropped the player ID and never included it in the features. Turns out, it's the most important feature for this classification task.
+
 ---
 
 ## 4. Task 3: Spending Prediction
@@ -88,7 +99,7 @@ The system is built as a modular pipeline, where each task represents a speciali
 
 *   **EDA Findings:** The data was **Zero-Inflated** (~48% non-spenders) and highly right-skewed among spenders.
 *   **Preprocessing:** Applied `log1p` transformation to the target variable and engineered historical spending features.
-*   **Model Design:** implemented a **Two-Stage Hurdle Model**:
+*   **Model Design:** Implemented a **Two-Stage Hurdle Model** using **XGBClassifier** and **LGBMClassifier** for classification, and **XGBRegressor** and **LGBMRegressor** for regression:
     1.  **Classification:** Predict probability of spending > 0.
     2.  **Regression:** Predict amount for identified spenders.
 
@@ -100,6 +111,9 @@ The system is built as a modular pipeline, where each task represents a speciali
 ### 4.3 Insights & Interpretation
 *   **Predictive Power:** Historical spending is the strongest predictor of future behavior ("stickiness").
 *   **Business Application:** Allows finance teams to forecast revenue and marketing teams to focus on high-probability conversion targets.
+
+### 4.4 Common Mistakes & Failed Experiments
+*   **Hyperparameter Tuning:** Initially, we used a small number of `n_estimators`, which prevented the XGBoost model from fully exploring and capturing the features to its full potential. After increasing the value of `n_estimators`, the model's prediction score improved significantly.
 
 ---
 
@@ -121,6 +135,15 @@ The system is built as a modular pipeline, where each task represents a speciali
 *   **ViT Superiority:** Vision Transformers proved exceptionally robust to low-resolution data compared to traditional CNNs.
 *   **Scalability:** The feature extraction approach allows for scalable content analysis without retraining heavy backbones.
 
+### 5.4 Common Mistakes & Failed Experiments
+*   **Failure 1: XGBoost on Embeddings**
+    *   *Experiment:* We hypothesized that XGBoost would dominate as it did in Tasks 1-3.
+    *   *Result:* It performed poorly (F1 0.48 vs NN 0.65).
+    *   *Lesson:* Gradient Boosting is King of Tabular Data, but Neural Networks are Queen of Embeddings.
+*   **Failure 2: Ignoring Class Weights**
+    *   *Issue:* The model initially ignored the minority classes.
+    *   *Solution:* We implemented "Soft Class Weights" (Square Root of inverse frequency) to gently nudge the model towards minority classes without causing instability.
+
 ---
 
 ## 6. Task 5: Account Security
@@ -139,6 +162,15 @@ The system is built as a modular pipeline, where each task represents a speciali
 ### 6.3 Insights & Interpretation
 *   **Security Profiles:** Successfully identified "Booster" accounts (high skill volatility) and "Hacked" accounts (asset liquidation patterns).
 *   **Operational Use:** Serves as a triage layer for Trust & Safety teams.
+
+### 6.4 Common Mistakes & Failed Experiments
+*   **Failure 1: Raw Score Averaging**
+    *   *Experiment:* Averaging the raw output of Isolation Forest (-0.5 to 0.5) with Autoencoder MSE (0.0 to 10.0).
+    *   *Result:* The Autoencoder dominated the decision simply because its numbers were bigger.
+    *   *Solution:* **Rank Averaging** normalized the contributions, allowing each model to vote equally based on relative ordering.
+*   **Failure 2: Ignoring Time**
+    *   *Experiment:* Treating the 4 time steps as independent features.
+    *   *Result:* Missed the "change" signal. A high value might be normal for a whale, but a *sudden jump* to a high value is suspicious. Vectorized temporal features fixed this.
 
 ---
 
