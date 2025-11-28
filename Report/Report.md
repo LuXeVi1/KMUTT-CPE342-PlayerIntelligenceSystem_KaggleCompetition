@@ -36,6 +36,10 @@ The system is built as a modular pipeline, where each task represents a speciali
 *   **Module 4:** Game Vision Engine (Deep Learning/Transformers)
 *   **Module 5:** Account Sentinel Engine (Unsupervised Anomaly Detection)
 
+### 1.4 Project Repository
+The complete source code, datasets, and documentation for this project are available on GitHub:
+*   **GitHub Repository:** [LuXeVi1/KMUTT-CPE342-PlayerIntelligenceSystem_KaggleCompetition](https://github.com/LuXeVi1/KMUTT-CPE342-PlayerIntelligenceSystem_KaggleCompetition)
+
 ---
 
 ## 2. Task 1: Anti-Cheat (Cheater Detection)
